@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?r8ff77');
+  src:  url('../fonts/icomoon.eot?r8ff77#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?r8ff77') format('truetype'),
+    url('../fonts/icomoon.woff?r8ff77') format('woff'),
+    url('../fonts/icomoon.svg?r8ff77#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fb:before {
+  content: "\e902";
+
+}
+.icon-grid:before {
+  content: "\e903";
+
+}
+.icon-instagram:before {
+  content: "\e904";
+
+}
+.icon-mail:before {
+  content: "\e905";
+
+}
+.icon-tw:before {
+  content: "\e907";
+
+}
+.icon-youtube:before {
+  content: "\e908";
+
+}
+.icon-arr:before {
+  content: "\e900";
+
+}
+.icon-arrow:before {
+  content: "\e901";
+}
+.icon-search:before {
+  content: "\e906";
+
+}

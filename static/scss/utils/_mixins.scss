@@ -1,0 +1,119 @@
+
+
+@mixin center_transform() {
+  	position:absolute;
+	left:50%;top:50%;
+	transform:translate(-50%, -50%);
+	-moz-transform:translate(-50%, -50%);
+	-webkit-transform:translate(-50%, -50%);
+	-ms-transform:translate(-50%, -50%);
+	-o-transform:translate(-50%, -50%);
+}
+
+@mixin vertical_center_transform() {
+  	position:absolute;
+	left:0;top:50%;
+	width: 100%;
+	transform:translate(0, -50%);
+	-moz-transform:translate(0, -50%);
+	-webkit-transform:translate(0, -50%);
+	-ms-transform:translate(0, -50%);
+	-o-transform:translate(0, -50%);
+}
+
+@mixin button($button-bg, $button-border, $button-border-color, $button-pad, $button-size, $button-line-height, $height-button, $button-radius) {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 0 0 0;
+	padding: 10px $button-pad 0 $button-pad;
+	background: $button-bg;
+	border: $button-border solid $button-border-color;
+	font-size: $button-size;
+	line-height: $button-line-height;
+	height: $height-button;
+	position: relative;
+	@include radius($button-radius);
+}
+
+@mixin font($font-s, $font-h, $font-c) {
+    font-size: $font-s;
+    line-height: $font-h;
+    color:$font-c;
+}
+
+@mixin placeholder-color($color){
+	&:-moz-placeholder,
+	&::-moz-placeholder{
+		color: $color;
+		opacity: 1;
+	}
+	&::-webkit-input-placeholder{
+		color: $color;
+	}
+	&:-ms-input-placeholder{
+		color: $color;
+		opacity: 1;
+	}
+}
+
+@mixin arr($width, $height, $bg, $direction){
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	@if $direction == t{
+		border-width: 0 $width / 2 + px $height + px $width / 2 + px;
+		border-color: transparent transparent $bg transparent;
+	}
+	@if $direction == r{
+		border-width: $height / 2 + px 0 $height / 2 + px $width + px;
+		border-color: transparent transparent transparent $bg;
+	}
+	@if $direction == b{
+		border-width: $height + px $width / 2 + px 0 $width / 2 + px;
+		border-color: $bg transparent transparent transparent;
+	}
+	@if $direction == l{
+		border-width: $height / 2 + px $width + px $height / 2 + px 0;
+		border-color: transparent $bg transparent transparent;
+	}
+	@if $direction == tl{
+		border-width: $height + px $width + px 0 0;
+		border-color: $bg transparent transparent transparent;
+	}
+	@if $direction == tr{
+		border-width: 0 $width + px $height + px 0;
+		border-color: transparent $bg transparent transparent;
+	}
+	@if $direction == br{
+		border-width: 0 0 $height + px $width + px;
+		border-color: transparent transparent $bg transparent;
+	}
+	@if $direction == bl{
+		border-width: $height + px 0 0 $width + px;
+		border-color: transparent transparent transparent $bg;
+	}
+}
+@mixin text-overflow{
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+  content: $content;
+  display: $display;
+  position: $pos;
+
+}
+@mixin flex-just{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/*задаём иконки с спрайта 
+.icon-home{
+  @include sprite($calendar);
+ }
+ */
+

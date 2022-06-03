@@ -1,0 +1,26 @@
+/* reset */
+$min-width: 320px; 
+$max-width: 1360px;  
+$base-bg: #fff; 
+$base-font-size: 10px; 
+$base-line-height: 1.6;  
+$base-font-family: 'Spartan', sans-serif; 
+$custom-font-family: 'Jost', sans-serif; 
+$link-color: #F55C6E; 
+$default-transition: all 0.3s linear; 
+
+/* main variables */
+
+//text, titles
+$text-color: #555555;
+$title-color: #000;
+$title-font-family: $custom-font-family;
+
+$font-size-h1: 4.8rem;
+$line-height-h1: 1.1;
+$font-size-h2: 4.8rem;
+$line-height-h2: 1.1;
+$font-size-h3: 3.0rem;
+$line-height-h3: 1.2;
+$font-size-h4: 2.4rem;
+$line-height-h4: 1.2;

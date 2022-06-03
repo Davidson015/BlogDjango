@@ -1,0 +1,28 @@
+@import "../base/_reset";
+@import "../base/_fonts";
+
+/* example mixins */
+
+.border-radius{
+	@include radius(10px);
+}
+.shadow{
+	@include shadow(0 5px 5px 0 rgba(0,0,0,0.5));
+}
+.button{
+	@include button(
+		#000,1px,#f0f0f0,25px,16px,19px,40px,20px
+	);
+}
+.font{
+	@include font(14px,18px,#000);
+}
+.center_transform{
+	@include center_transform();
+}
+.verrical_center_transform{
+	@include verrical_center_transform();
+}
+
+
+/* example mixins */
