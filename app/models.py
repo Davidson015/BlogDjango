@@ -28,7 +28,7 @@ class Blog(models.Model):
 
   title = models.CharField(max_length=500)
   content = models.TextField()
-  image = models.ImageField(upload_to="pics/")
+  image = models.ImageField(upload_to="BlogImages/")
   author = models.CharField(max_length=150)
   category = models.ForeignKey("Category", on_delete=models.CASCADE)
   slug = models.SlugField(max_length=100, unique=True, blank=True)
