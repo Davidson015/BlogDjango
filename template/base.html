@@ -31,13 +31,13 @@
                             <a href="#" class="header_categ_opener"><span class="icon-grid"></span>Categories</a>
                             <div class="header_categ_drop">
                                 <ul class="catlist">
-                                    <li><a href="blog.html">Home&garden <span>(15)</span></a></li>
-                                    <li><a href="blog.html">Travel <span>(23)</span></a></li>
-                                    <li><a href="blog.html">Electronics <span>(34)</span></a></li>
-                                    <li><a href="blog.html">Office <span>(5)</span></a></li>
-                                    <li><a href="blog.html">cars <span>(51)</span></a></li>
-                                    <li><a href="blog.html">pets <span>(8)</span></a></li>
-                                    <li><a href="blog.html">fashion <span>(29)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">Home&garden <span>(15)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">Travel <span>(23)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">Electronics <span>(34)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">Office <span>(5)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">cars <span>(51)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">pets <span>(8)</span></a></li>
+                                    <li><a href="{% url 'Blog' %}">fashion <span>(29)</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -45,14 +45,14 @@
                     </div>
                 </div>
                 <div class="header_mid">
-                    <a href="index.html" class="header_logo logo" title=""><img data-src="{% static 'img/logo.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>    
+                    <a href="{% url 'Index' %}" class="header_logo logo" title=""><img data-src="{% static 'img/logo.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>    
                     <ul class="header_nav">
-                        <li><a href="index.html">Recent posts</a></li>
-                        <li><a href="index.html">popular</a></li>
-                        <li><a href="index.html">Most read</a></li>
-                        <li><a href="index.html">Hot stuff</a></li>
-                        <li><a href="index.html">top of the week</a></li>
-                        <li><a href="index.html">Must read</a></li>
+                        <li><a href="{% url 'Index' %}">Recent posts</a></li>
+                        <li><a href="{% url 'Index' %}">popular</a></li>
+                        <li><a href="{% url 'Index' %}">Most read</a></li>
+                        <li><a href="{% url 'Index' %}">Hot stuff</a></li>
+                        <li><a href="{% url 'Index' %}">top of the week</a></li>
+                        <li><a href="{% url 'Index' %}">Must read</a></li>
                     </ul>
                     <a href="#" class="button-nav"><span></span></a>
                 </div>
@@ -71,21 +71,9 @@
                     <div class="footer_cols_item footer_cols_item-2">
                         <div class="footer_title">Categories</div>
                         <ul class="footer_list">
-                            <li><a href="blog.html">Home</a></li>
-                            <li><a href="blog.html">Kitchen</a></li>
-                            <li><a href="blog.html">Garden</a></li>
-                            <li><a href="blog.html">Cars</a></li>
-                            <li><a href="blog.html">Travel</a></li>
-                            <li><a href="blog.html">Pets</a></li>
-                            <li><a href="blog.html">Office</a></li>
-                            <li><a href="blog.html">Electronics</a></li>
-                            <li><a href="blog.html">Hobby</a></li>
-                            <li><a href="blog.html">Baby</a></li>
-                            <li><a href="blog.html">Holiday</a></li>
-                            <li><a href="blog.html">Software</a></li>
-                            <li><a href="blog.html">Health</a></li>
-                            <li><a href="blog.html">Appliences</a></li>
-                            <li><a href="blog.html">Money</a></li>
+                            {% for c in category %}
+                                <li><a href="{% url 'Blog' %}">{{c.name}}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="footer_cols_item footer_cols_item-3">
@@ -132,5 +120,6 @@
     <!-- BODY EOF   -->
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>      
     <script src="{% static 'js/custom.js' %}" ></script>
+    <script src="{% static 'js/components/slick.js' %}"></script>
 </body>
 </html>
