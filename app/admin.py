@@ -1,22 +1,23 @@
 from django.contrib import admin
 from app.models import *
+from import_export.admin import ImportExportMixin
 
 # Register your models here.
-admin.site.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
+
+# Exporting Blogs to CSV
+class BlogAdmin(ImportExportMixin, admin.ModelAdmin):
   list_display = [
-    'slug',
     "title",
     "content",
-    "image",
     "category",
     "created_at",
     "author",
   ]
+admin.site.register(Blog, BlogAdmin)
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+# Exporting Categories to CSV
+class CategoryAdmin(ImportExportMixin, admin.ModelAdmin):
   list_display = [
-    'slug',
     "name",
   ]
+admin.site.register(Category, CategoryAdmin)
