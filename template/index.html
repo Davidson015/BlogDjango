@@ -5,54 +5,24 @@
     <main class="content">
         <div class="section-welcome">
             <div class="welcome_slider js-welcome_slider">
-                <div class="welcome_slider_item"><a href="article.html" class="cover_link"></a>
-                    <div class="welcome_slider_img"><img src="{% static 'img/img24.jpg' %}" alt=""/></div>
-                    <div class="welcome_slider_cont">
-                        <div class="welcome_slider_cats cats">
-                            <a href="blog.html" class="cats_item">travel</a>
-                        </div>
-                        <div class="welcome_slider_title h3"><a href="article.html">a set of the most necessary things on vacation</a></div>
-                        <div class="welcome_slider_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava6.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Marvin McKinney
+                {% for f in featured_posts %}
+                    <div class="welcome_slider_item slick-slide"><a href="article.html" class="cover_link"></a>
+                        <div class="welcome_slider_img"><img data-src="{{f.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                        <div class="welcome_slider_cont">
+                            <div class="welcome_slider_cats cats">
+                                <a href="blog.html" class="cats_item">{{f.category}}</a>
+                            </div>
+                            <div class="welcome_slider_title h3"><a href="article.html">{{f.title}}</a></div>
+                            <div class="welcome_slider_infoline infoline">
+                                <div class="infoline_date">{{f.created_at}}</div> <span class="dash"></span>
+                                <div class="infoline_author">
+                                    <div class="ava"><img data-src="{% static 'img/ava6.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                    {{f.author}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="welcome_slider_item slick-slide"><a href="article.html" class="cover_link"></a>
-                    <div class="welcome_slider_img"><img data-src="{% static 'img/img7.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                    <div class="welcome_slider_cont">
-                        <div class="welcome_slider_cats cats">
-                            <a href="blog.html" class="cats_item">travel</a>
-                        </div>
-                        <div class="welcome_slider_title h3"><a href="article.html">a set of the most necessary things on vacation</a></div>
-                        <div class="welcome_slider_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Marie Caphlish
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="welcome_slider_item slick-slide"><a href="article.html" class="cover_link"></a>
-                    <div class="welcome_slider_img"><img data-src="{% static 'img/img8.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                    <div class="welcome_slider_cont">
-                        <div class="welcome_slider_cats cats">
-                            <a href="blog.html" class="cats_item">travel</a>
-                        </div>
-                        <div class="welcome_slider_title h3"><a href="article.html">a set of the most necessary things on vacation</a></div>
-                        <div class="welcome_slider_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Marie Caphlish
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <section class="section-stories">
@@ -65,91 +35,43 @@
                     <div class="columns">
                         <div class="columns_center">
                             <div class="recent">
-                                <div class="recent_item">
-                                    <div class="recent_item_img">
-                                        <a href="article.html"><img data-src="{% static 'img/img14.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                        <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">home</a></div>
-                                    </div>
-                                    <div class="recent_item_cont">
-                                        <div class="recent_item_title h3"><a href="article.html">selection of very comfortable furniture for relaxing on the terrace</a></div>
-                                        <div class="recent_item_txt">A breakdown or a flat tire can happen to anyone at any time, and what you have in your car can make the difference between getting back on the ...</div>
-                                        <div class="recent_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_author">
-                                                <div class="ava"><img data-src="{% static 'img/ava7.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                                Marie Caphlish
+                                {% for r in recent_posts %}
+                                    <div class="recent_item">
+                                        <div class="recent_item_img">
+                                            <a href="article.html"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                                            <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">{{r.category}}</a></div>
+                                        </div>
+                                        <div class="recent_item_cont">
+                                            <div class="recent_item_title h3"><a href="article.html">{{r.title}}</a></div>
+                                            <div class="recent_item_txt">{{r.content|truncatewords:25}}</div>
+                                            <div class="recent_item_infoline infoline">
+                                                <div class="infoline_date">{{r.created_at}}</div> <span class="dash"></span>
+                                                <div class="infoline_author">
+                                                    <div class="ava"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                                    {{r.author}}
+                                                </div>
+                                                <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
                                             </div>
-                                            <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="recent_item">
-                                    <div class="recent_item_img">
-                                        <a href="article.html"><img data-src="{% static 'img/img15.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                        <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">fashion</a></div>
-                                    </div>
-                                    <div class="recent_item_cont">
-                                        <div class="recent_item_title h3"><a href="article.html">modern style for young fashionistas spring autumn</a></div>
-                                        <div class="recent_item_txt">A breakdown or a flat tire can happen to anyone at any time, and what you have in your car can make the difference between getting back on the ...</div>
-                                        <div class="recent_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_author">
-                                                <div class="ava"><img data-src="{% static 'img/ava.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                                Marie Caphlish
-                                            </div>
-                                            <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="recent_item">
-                                    <div class="recent_item_img">
-                                        <a href="article.html"><img data-src="{% static 'img/img16.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                        <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">electronics</a></div>
-                                    </div>
-                                    <div class="recent_item_cont">
-                                        <div class="recent_item_title h3"><a href="article.html">are you ready to try new things in electronics this year</a></div>
-                                        <div class="recent_item_txt">A breakdown or a flat tire can happen to anyone at any time, and what you have in your car can make the difference between getting back on the ...</div>
-                                        <div class="recent_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_author">
-                                                <div class="ava"><img data-src="{% static 'img/ava.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                                Marie Caphlish
-                                            </div>
-                                            <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <aside class="columns_sidebar sidebar">
                             <div class="sidebar_widget">
                                 <div class="stories">
-                                    <div class="stories_item">
-                                        <div class="stories_item_img"><a href="article.html"><img data-src="{% static 'img/img2.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
-                                        <div class="stories_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#pets</div>
+                                    {% for s in side_recent_posts %}
+                                        <div class="stories_item">
+                                            <div class="stories_item_img"><a href="article.html"><img data-src="{{s.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                                            <div class="stories_infoline infoline">
+                                                <div class="infoline_date">{{s.created_at}}</div> <span class="dash"></span>
+                                                <div class="infoline_tag">#{{s.category}}</div>
+                                            </div>
+                                            <div class="stories_item_title"><a href="article.html">{{s.title}}</a></div>
                                         </div>
-                                        <div class="stories_item_title"><a href="article.html">fresh home photo session. see how we love our pets</a></div>
-                                    </div>
-                                    <div class="stories_item">
-                                        <div class="stories_item_img"><a href="article.html"><img data-src="{% static 'img/img3.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
-                                        <div class="stories_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#garden</div>
-                                        </div>
-                                        <div class="stories_item_title"><a href="article.html">the best ideas for decorating living areas in your garden</a></div>
-                                    </div>
-                                    <div class="stories_item">
-                                        <div class="stories_item_img"><a href="article.html"><img data-src="{% static 'img/img17.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
-                                        <div class="stories_infoline infoline">
-                                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#trevel</div>
-                                        </div>
-                                        <div class="stories_item_title"><a href="article.html">how not to get lost without knowing the language</a></div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
-                                <div class="stories_btn"><a href="blog.html" class="btn">view all</a></div>
+                                <div class="stories_btn"><a href="{% url 'Blog' %}" class="btn">view all</a></div>
                             </div>
                         </aside>
                     </div>
@@ -160,19 +82,21 @@
             <div class="wrapper">
                 <div class="section_title">
                     <h2>Popular posts</h2>
-                    <a href="blog.html" class="link-view">View all posts <span class="icon-arr"></span></a>
+                    <a href="{% url 'Blog' %}" class="link-view">View all posts <span class="icon-arr"></span></a>
                 </div>
                 <div class="columns columns-invers">
                     <div class="columns_center">
                         <div class="popular_main">
-                            <div class="popular_main_img"><a href="article.html"><img data-src="{% static 'img/img18.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                            <div class="popular_main_img"><a href="article.html"><img data-src="{{popular_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                             <div class="popular_main_cont">
                                 <div class="popular_main_infoline infoline">
-                                    <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                    <div class="infoline_tag">#cosmetics</div>
+                                    <div class="infoline_date">popular_post.created_at</div> <span class="dash"></span>
+                                    <div class="infoline_tag">#{{popular_post.category}}</div>
                                 </div>
-                                <div class="popular_main_title h3"><a href="article.html">universal cream for any type of skin</a></div>
-                                <div class="popular_main_txt">A breakdown or a flat tire can happen to anyone at any time, and...</div>
+                                <div class="popular_main_title h3"><a href="article.html">{{popular_post.title}}</a></div>
+                                <div class="popular_main_txt">
+                                    {{popular_post.content|truncatewords:10}}
+                                </div>
                                 <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
                             </div>
                         </div>
@@ -180,50 +104,19 @@
                     <aside class="columns_sidebar sidebar">
                         <div class="sidebar_widget">
                             <div class="popular">
-                                <div class="popular_item">
-                                    <div class="popular_item_img"><a href="article.html"><img data-src="{% static 'img/img4.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
-                                    <div class="popular_item_cont">
-                                        <div class="popular_item_title"><a href="article.html">the best indoor plants to create comfort at home</a></div>
-                                        <div class="popular_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#trevel</div> <span class="dash"></span>
-                                            <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                {% for p in side_popular_posts %}
+                                    <div class="popular_item">
+                                        <div class="popular_item_img"><a href="article.html"><img data-src="{{p.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                                        <div class="popular_item_cont">
+                                            <div class="popular_item_title"><a href="article.html">{{p.title|truncatewords:05}}</a></div>
+                                            <div class="popular_item_infoline infoline">
+                                                <div class="infoline_date">{{p.created_at}}</div> <span class="dash"></span>
+                                                <div class="infoline_tag">#{{p.category}}</div> <span class="dash"></span>
+                                                <div class="infoline_tag"><span class="icon-comm"></span>5</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="popular_item">
-                                    <div class="popular_item_img"><a href="article.html"><img data-src="{% static 'img/img5.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
-                                    <div class="popular_item_cont">
-                                        <div class="popular_item_title"><a href="article.html">a set of the most necessary things on vaca..</a></div>
-                                        <div class="popular_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#trevel</div> <span class="dash"></span>
-                                            <div class="infoline_tag"><span class="icon-comm"></span>5</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="popular_item">
-                                    <div class="popular_item_img"><a href="article.html"><img data-src="{% static 'img/img19.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
-                                    <div class="popular_item_cont">
-                                        <div class="popular_item_title"><a href="article.html">how does your morning at the office begin?</a></div>
-                                        <div class="popular_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#office</div> <span class="dash"></span>
-                                            <div class="infoline_tag"><span class="icon-comm"></span>5</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="popular_item">
-                                    <div class="popular_item_img"><a href="article.html"><img data-src="{% static 'img/img6.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
-                                    <div class="popular_item_cont">
-                                        <div class="popular_item_title"><a href="article.html">only here are the most beautiful sunsets</a></div>
-                                        <div class="popular_item_infoline infoline">
-                                            <div class="infoline_date">Jul 06</div> <span class="dash"></span>
-                                            <div class="infoline_tag">#trevel</div> <span class="dash"></span>
-                                            <div class="infoline_tag"><span class="icon-comm"></span>5</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </aside>
@@ -240,83 +133,28 @@
                             <a href="blog.html" class="link-view">View all posts <span class="icon-arr"></span></a>
                         </div>
                         <div class="readed">
-                            <div class="readed_item">
-                                <div class="readed_item_img">
-                                    <a href="article.html"><img data-src="{% static 'img/img20.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                    <div class="readed_item_cats cats">
-                                        <a href="blog.html" class="cats_item">home</a>
-                                        <a href="blog.html" class="cats_item">office</a>
-                                    </div>
-                                </div>
-                                <div class="readed_item_cont">
-                                    <div class="readed_item_title"><a href="article.html">how to create a cozy scent in any room using only ...</a></div>
-                                    <div class="readed_item_infoline infoline">
-                                        <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                        <div class="infoline_author">
-                                            <div class="ava"><img data-src="{% static 'img/ava7.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                            Jane Cooper
+                            {% for m in most_read_posts %}
+                                <div class="readed_item">
+                                    <div class="readed_item_img">
+                                        <a href="article.html"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                                        <div class="readed_item_cats cats">
+                                            <a href="blog.html" class="cats_item">{{m.category}}</a>
+                                            <a href="blog.html" class="cats_item">{{m.category}}</a>
                                         </div>
-                                        <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="readed_item">
-                                <div class="readed_item_img">
-                                    <a href="article.html"><img data-src="{% static 'img/img21.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                    <div class="readed_item_cats cats">
-                                        <a href="blog.html" class="cats_item">garden</a>
-                                    </div>
-                                </div>
-                                <div class="readed_item_cont">
-                                    <div class="readed_item_title"><a href="article.html">pets of our gardeners. all about care and fertilizers</a></div>
-                                    <div class="readed_item_infoline infoline">
-                                        <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                        <div class="infoline_author">
-                                            <div class="ava"><img data-src="{% static 'img/ava8.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                            Devon Lane
+                                    <div class="readed_item_cont">
+                                        <div class="readed_item_title"><a href="article.html">{{m.title|truncatewords:05}}</a></div>
+                                        <div class="readed_item_infoline infoline">
+                                            <div class="infoline_date">{{m.created_at}}</div> <span class="dash"></span>
+                                            <div class="infoline_author">
+                                                <div class="ava"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                                {{m.author}}
+                                            </div>
+                                            <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
                                         </div>
-                                        <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="readed_item">
-                                <div class="readed_item_img">
-                                    <a href="article.html"><img data-src="{% static 'img/img22.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                    <div class="readed_item_cats cats">
-                                        <a href="blog.html" class="cats_item">office</a>
-                                    </div>
-                                </div>
-                                <div class="readed_item_cont">
-                                    <div class="readed_item_title"><a href="article.html">how to properly illuminate the workplace so as not to stra...</a></div>
-                                    <div class="readed_item_infoline infoline">
-                                        <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                        <div class="infoline_author">
-                                            <div class="ava"><img data-src="{% static 'img/ava3.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                            Marvin McKinney
-                                        </div>
-                                        <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="readed_item">
-                                <div class="readed_item_img">
-                                    <a href="article.html"><img data-src="{% static 'img/img23.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                    <div class="readed_item_cats cats">
-                                        <a href="blog.html" class="cats_item">trevel</a>
-                                    </div>
-                                </div>
-                                <div class="readed_item_cont">
-                                    <div class="readed_item_title"><a href="article.html">where to rest for those who do not like noisy places</a></div>
-                                    <div class="readed_item_infoline infoline">
-                                        <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                                        <div class="infoline_author">
-                                            <div class="ava"><img data-src="{% static 'img/ava9.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                            Jane Cooper
-                                        </div>
-                                        <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <aside class="columns_sidebar sidebar">
@@ -325,13 +163,9 @@
                         </div>
                         <div class="sidebar_widget">
                             <ul class="catlist">
-                                <li><a href="blog.html">Home&garden <span>(15)</span></a></li>
-                                <li><a href="blog.html">Travel <span>(23)</span></a></li>
-                                <li><a href="blog.html">Electronics <span>(34)</span></a></li>
-                                <li><a href="blog.html">Office <span>(5)</span></a></li>
-                                <li><a href="blog.html">cars <span>(51)</span></a></li>
-                                <li><a href="blog.html">pets <span>(8)</span></a></li>
-                                <li><a href="blog.html">fashion <span>(29)</span></a></li>
+                                {% for cat in category %}
+                                    <li><a href="{% url 'Blog' %}"><span>{{ cat.name }}</span> (-)</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <a href="#" class="bann"><img data-src="{% static 'img/bad2.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
@@ -356,18 +190,18 @@
                     <h2>Hot stuff</h2>
                 </div>
                 <div class="hot">
-                    <div class="hot_img"><a href="article.html"><img data-src="{% static 'img/img13.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                    <div class="hot_img"><a href="article.html"><img data-src="{{hot_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                     <div class="hot_cont">
                         <div class="hot_cats cats">
-                            <a href="blog.html" class="cats_item">interior</a>
+                            <a href="blog.html" class="cats_item">{{hot_post.category}}</a>
                         </div>
-                        <h2 class="hot_title"><a href="article.html">the best solutions for the interior of a bedroom in an apartment</a></h2>
-                        <div class="hot_txt">A breakdown or a flat tire can happen to anyone at any time, and what you have in your car can make the difference between getting back ...</div>
+                        <h2 class="hot_title"><a href="article.html">{{hot_post.title|truncatewords:05}}</a></h2>
+                        <div class="hot_txt">{{hot_post.content|truncatewords:15}}</div>
                         <div class="hot_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
+                            <div class="infoline_date">{{hot_post.created_at}}</div> <span class="dash"></span>
                             <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava5.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Ralph Edwards
+                                <div class="ava"><img data-src="{{hot_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                {{hot_post.author}}
                             </div>
                         </div>
                         <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
@@ -379,55 +213,27 @@
             <div class="wrapper">
                 <div class="section_title">
                     <h2>top of the week</h2>
-                    <a href="blog.html" class="link-view">View all posts <span class="icon-arr"></span></a>
+                    <a href="{% url 'Blog' %}" class="link-view">View all posts <span class="icon-arr"></span></a>
                 </div>
                 <div class="topof">
-                    <div class="topof_item">
-                        <div class="topof_item_img"><a href="article.html"><img data-src="{% static 'img/img10.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
-                        <div class="topof_cats cats">
-                            <a href="blog.html" class="cats_item">fashion</a>
-                            <a href="blog.html" class="cats_item">pets</a>
-                        </div>
-                        <div class="topof_item_title"><a href="article.html">a new trend of a photo shoot with pets is gaining high popularity amo...</a></div>
-                        <div class="topof_item_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava2.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Jerome Bell
+                    {% for t in top_of_the_week %}
+                        <div class="topof_item">
+                            <div class="topof_item_img"><a href="article.html"><img data-src="{{t.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
+                            <div class="topof_cats cats">
+                                <a href="blog.html" class="cats_item">{{t.category}}</a>
+                                <a href="blog.html" class="cats_item">{{t.category}}</a>
                             </div>
-                        </div>
-                        <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
-                    </div>
-                    <div class="topof_item">
-                        <div class="topof_item_img"><a href="article.html"><img data-src="{% static 'img/img11.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
-                        <div class="topof_cats cats">
-                            <a href="blog.html" class="cats_item">pets</a>
-                        </div>
-                        <div class="topof_item_title"><a href="article.html">how to properly care for pedigree cats at home</a></div>
-                        <div class="topof_item_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava3.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Brooklyn Simmons
+                            <div class="topof_item_title"><a href="article.html">{{t.title|truncatewords:10}}</a></div>
+                            <div class="topof_item_infoline infoline">
+                                <div class="infoline_date">{{t.created_at}}</div> <span class="dash"></span>
+                                <div class="infoline_author">
+                                    <div class="ava"><img data-src="{{t.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                    {{t.author}}
+                                </div>
                             </div>
+                            <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
                         </div>
-                        <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
-                    </div>
-                    <div class="topof_item">
-                        <div class="topof_item_img"><a href="article.html"><img data-src="{% static 'img/img12.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
-                        <div class="topof_cats cats">
-                            <a href="blog.html" class="cats_item">books</a>
-                        </div>
-                        <div class="topof_item_title"><a href="article.html">a selection of the best travel books for lovers of a quiet holiday</a></div>
-                        <div class="topof_item_infoline infoline">
-                            <div class="infoline_date">Jul 06, 2021</div> <span class="dash"></span>
-                            <div class="infoline_author">
-                                <div class="ava"><img data-src="{% static 'img/ava4.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                Ronald Richards
-                            </div>
-                        </div>
-                        <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

@@ -107,15 +107,9 @@
                         <div class="sidebar_widget">
                             <h3>Categories</h3>
                             <div class="cats">
-                                <a href="blog.html" class="cats_item">travel</a><a href="blog.html" class="cats_item">electronics</a><a href="blog.html" class="cats_item">office</a>
-                                <a href="blog.html" class="cats_item">garden</a><a href="blog.html" class="cats_item">web</a><a href="blog.html" class="cats_item">community</a>
-                                <a href="blog.html" class="cats_item">development</a><a href="#" class="cats_item">business</a><a href="blog.html" class="cats_item">home</a>
-                                <a href="blog.html" class="cats_item">app</a><a href="blog.html" class="cats_item">fashion</a><a href="blog.html" class="cats_item">pets</a>
-                                <a href="blog.html" class="cats_item">books</a><a href="blog.html" class="cats_item">kitchen</a><a href="blog.html" class="cats_item">hobby</a>
-                                <a href="blog.html" class="cats_item">Holiday </a><a href="blog.html" class="cats_item">Baby</a><a href="blog.html" class="cats_item">Software</a>
-                                <a href="blog.html" class="cats_item">Health</a><a href="blog.html" class="cats_item">Appliences</a><a href="blog.html" class="cats_item">cars</a>
-                                <a href="blog.html" class="cats_item">design</a><a href="blog.html" class="cats_item">money</a><a href="blog.html" class="cats_item">art</a>
-                                <a href="blog.html" class="cats_item">science</a><a href="blog.html" class="cats_item">marketing</a><a href="blog.html" class="cats_item">digital</a>
+                                {% for cat in category %}
+                                <a href="{% url 'Blog' %}" class="cats_item">{{cat.name}}</a>
+                                {% endfor %}
                             </div>
                         </div>
                         <a href="#" class="bann"><img data-src="{% static 'img/bad2.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
