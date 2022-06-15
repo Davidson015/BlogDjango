@@ -21,3 +21,14 @@ class CategoryAdmin(ImportExportMixin, admin.ModelAdmin):
     "name",
   ]
 admin.site.register(Category, CategoryAdmin)
+
+
+# Exporting Comments to CSV
+class CommentAdmin(ImportExportMixin, admin.ModelAdmin):
+  list_display = [
+    "post",
+    "comment",
+    "full_name",
+    "created_at",
+  ]
+admin.site.register(Comment, CommentAdmin)

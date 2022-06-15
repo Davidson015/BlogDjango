@@ -6,13 +6,13 @@
         <div class="section-welcome">
             <div class="welcome_slider js-welcome_slider">
                 {% for f in featured_posts %}
-                    <div class="welcome_slider_item slick-slide"><a href="article.html" class="cover_link"></a>
+                    <div class="welcome_slider_item slick-slide"><a href="{% url 'post_details' f.slug %}" class="cover_link"></a>
                         <div class="welcome_slider_img"><img data-src="{{f.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
                         <div class="welcome_slider_cont">
                             <div class="welcome_slider_cats cats">
                                 <a href="blog.html" class="cats_item">{{f.category}}</a>
                             </div>
-                            <div class="welcome_slider_title h3"><a href="article.html">{{f.title}}</a></div>
+                            <div class="welcome_slider_title h3"><a href="{% url 'post_details' f.slug %}">{{f.title}}</a></div>
                             <div class="welcome_slider_infoline infoline">
                                 <div class="infoline_date">{{f.created_at}}</div> <span class="dash"></span>
                                 <div class="infoline_author">
@@ -38,11 +38,11 @@
                                 {% for r in recent_posts %}
                                     <div class="recent_item">
                                         <div class="recent_item_img">
-                                            <a href="article.html"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                                            <a href="{% url 'post_details' r.slug %}"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
                                             <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">{{r.category}}</a></div>
                                         </div>
                                         <div class="recent_item_cont">
-                                            <div class="recent_item_title h3"><a href="article.html">{{r.title}}</a></div>
+                                            <div class="recent_item_title h3"><a href="{% url 'post_details' r.slug %}">{{r.title}}</a></div>
                                             <div class="recent_item_txt">{{r.content|truncatewords:25}}</div>
                                             <div class="recent_item_infoline infoline">
                                                 <div class="infoline_date">{{r.created_at}}</div> <span class="dash"></span>
@@ -50,7 +50,7 @@
                                                     <div class="ava"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
                                                     {{r.author}}
                                                 </div>
-                                                <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
+                                                <a href="{% url 'post_details' r.slug %}" class="btn-arr"><span class="icon-arrow"></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -62,12 +62,12 @@
                                 <div class="stories">
                                     {% for s in side_recent_posts %}
                                         <div class="stories_item">
-                                            <div class="stories_item_img"><a href="article.html"><img data-src="{{s.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                                            <div class="stories_item_img"><a href="{% url 'post_details' s.slug %}"><img data-src="{{s.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                                             <div class="stories_infoline infoline">
                                                 <div class="infoline_date">{{s.created_at}}</div> <span class="dash"></span>
                                                 <div class="infoline_tag">#{{s.category}}</div>
                                             </div>
-                                            <div class="stories_item_title"><a href="article.html">{{s.title}}</a></div>
+                                            <div class="stories_item_title"><a href="{% url 'post_details' s.slug %}">{{s.title}}</a></div>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -87,17 +87,17 @@
                 <div class="columns columns-invers">
                     <div class="columns_center">
                         <div class="popular_main">
-                            <div class="popular_main_img"><a href="article.html"><img data-src="{{popular_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                            <div class="popular_main_img"><a href="{% url 'post_details' popular_post.slug %}"><img data-src="{{popular_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                             <div class="popular_main_cont">
                                 <div class="popular_main_infoline infoline">
                                     <div class="infoline_date">popular_post.created_at</div> <span class="dash"></span>
                                     <div class="infoline_tag">#{{popular_post.category}}</div>
                                 </div>
-                                <div class="popular_main_title h3"><a href="article.html">{{popular_post.title}}</a></div>
+                                <div class="popular_main_title h3"><a href="{% url 'post_details' popular_post.slug %}">{{popular_post.title}}</a></div>
                                 <div class="popular_main_txt">
                                     {{popular_post.content|truncatewords:10}}
                                 </div>
-                                <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
+                                <a href="{% url 'post_details' popular_post.slug %}" class="link-view">Read more <span class="icon-arr"></span></a>
                             </div>
                         </div>
                     </div>
@@ -106,9 +106,9 @@
                             <div class="popular">
                                 {% for p in side_popular_posts %}
                                     <div class="popular_item">
-                                        <div class="popular_item_img"><a href="article.html"><img data-src="{{p.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                                        <div class="popular_item_img"><a href="{% url 'post_details' p.slug %}"><img data-src="{{p.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                                         <div class="popular_item_cont">
-                                            <div class="popular_item_title"><a href="article.html">{{p.title|truncatewords:05}}</a></div>
+                                            <div class="popular_item_title"><a href="{% url 'post_details' p.slug %}">{{p.title|truncatewords:05}}</a></div>
                                             <div class="popular_item_infoline infoline">
                                                 <div class="infoline_date">{{p.created_at}}</div> <span class="dash"></span>
                                                 <div class="infoline_tag">#{{p.category}}</div> <span class="dash"></span>
@@ -136,21 +136,21 @@
                             {% for m in most_read_posts %}
                                 <div class="readed_item">
                                     <div class="readed_item_img">
-                                        <a href="article.html"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                                        <a href="{% url 'post_details' m.slug %}"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
                                         <div class="readed_item_cats cats">
                                             <a href="blog.html" class="cats_item">{{m.category}}</a>
                                             <a href="blog.html" class="cats_item">{{m.category}}</a>
                                         </div>
                                     </div>
                                     <div class="readed_item_cont">
-                                        <div class="readed_item_title"><a href="article.html">{{m.title|truncatewords:05}}</a></div>
+                                        <div class="readed_item_title"><a href="{% url 'post_details' m.slug %}">{{m.title|truncatewords:05}}</a></div>
                                         <div class="readed_item_infoline infoline">
                                             <div class="infoline_date">{{m.created_at}}</div> <span class="dash"></span>
                                             <div class="infoline_author">
                                                 <div class="ava"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
                                                 {{m.author}}
                                             </div>
-                                            <a href="article.html" class="btn-arr"><span class="icon-arrow"></span></a>
+                                            <a href="{% url 'post_details' m.slug %}" class="btn-arr"><span class="icon-arrow"></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -190,12 +190,12 @@
                     <h2>Hot stuff</h2>
                 </div>
                 <div class="hot">
-                    <div class="hot_img"><a href="article.html"><img data-src="{{hot_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
+                    <div class="hot_img"><a href="{% url 'post_details' hot_post.slug %}"><img data-src="{{hot_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                     <div class="hot_cont">
                         <div class="hot_cats cats">
                             <a href="blog.html" class="cats_item">{{hot_post.category}}</a>
                         </div>
-                        <h2 class="hot_title"><a href="article.html">{{hot_post.title|truncatewords:05}}</a></h2>
+                        <h2 class="hot_title"><a href="{% url 'post_details' hot_post.slug %}">{{hot_post.title|truncatewords:05}}</a></h2>
                         <div class="hot_txt">{{hot_post.content|truncatewords:15}}</div>
                         <div class="hot_infoline infoline">
                             <div class="infoline_date">{{hot_post.created_at}}</div> <span class="dash"></span>
@@ -204,7 +204,7 @@
                                 {{hot_post.author}}
                             </div>
                         </div>
-                        <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
+                        <a href="{% url 'post_details' hot_post.slug %}" class="link-view">Read more <span class="icon-arr"></span></a>
                     </div>
                 </div>
             </div>
@@ -218,12 +218,12 @@
                 <div class="topof">
                     {% for t in top_of_the_week %}
                         <div class="topof_item">
-                            <div class="topof_item_img"><a href="article.html"><img data-src="{{t.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
+                            <div class="topof_item_img"><a href="{% url 'post_details' t.slug %}"><img data-src="{{t.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
                             <div class="topof_cats cats">
                                 <a href="blog.html" class="cats_item">{{t.category}}</a>
                                 <a href="blog.html" class="cats_item">{{t.category}}</a>
                             </div>
-                            <div class="topof_item_title"><a href="article.html">{{t.title|truncatewords:10}}</a></div>
+                            <div class="topof_item_title"><a href="{% url 'post_details' t.slug %}">{{t.title|truncatewords:10}}</a></div>
                             <div class="topof_item_infoline infoline">
                                 <div class="infoline_date">{{t.created_at}}</div> <span class="dash"></span>
                                 <div class="infoline_author">
@@ -231,7 +231,7 @@
                                     {{t.author}}
                                 </div>
                             </div>
-                            <a href="article.html" class="link-view">Read more <span class="icon-arr"></span></a>
+                            <a href="{% url 'post_details' t.slug %}" class="link-view">Read more <span class="icon-arr"></span></a>
                         </div>
                     {% endfor %}
                 </div>

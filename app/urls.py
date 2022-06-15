@@ -6,6 +6,7 @@ from django.conf import settings
 urlpatterns = [
   path('', IndexPage, name="Index"),
   path('blog/', BlogHome, name="Blog"),
+  path('blog-details/<str:slug>/', PostDetails, name="post_details"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

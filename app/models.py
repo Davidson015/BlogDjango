@@ -48,3 +48,23 @@ class Blog(models.Model):
 
   def get_absolute_url(self):
     return reverse("Blog_detail", kwargs={"pk": self.pk})
+
+class Comment(models.Model):
+
+  post = models.ForeignKey(Blog, on_delete=models.CASCADE)
+  full_name = models.CharField(max_length=100)
+  phone_number = models.CharField(max_length=50)
+  email = models.EmailField(max_length=254)
+  comment = models.TextField()
+  created_at = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    verbose_name = ("Comment")
+    verbose_name_plural = ("Comments")
+
+  def __str__(self):
+    return f"{self.full_name} - {self.phone_number}"
+
+  def get_absolute_url(self):
+    return reverse("Comment_detail", kwargs={"pk": self.pk})
+
