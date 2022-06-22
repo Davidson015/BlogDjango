@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
 from app.forms import CommentForm
 
@@ -26,10 +27,16 @@ def IndexPage(request):
   return render(request, template_name, context)
 
 # Blog Page
-def BlogHome(request):
+def BlogHome(request, slug):
   template_name = 'blog.html'
 
-  return render(request, template_name)
+  posts = Blog.objects.filter(category__slug=slug)
+
+  context = {
+    'posts': posts,
+  }
+
+  return render(request, template_name, context)
 
 # Blog Details Page
 def PostDetails(request, slug):
