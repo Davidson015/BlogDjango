@@ -5,7 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
   path('', IndexPage, name="Index"),
-  path('blog/', BlogHome, name="Blog"),
+  path('blog/category/<str:slug>/', BlogHome, name="Blog"),
   path('blog-details/<str:slug>/', PostDetails, name="post_details"),
 ]
 

@@ -17,7 +17,7 @@
                         <article class="article">
                             <div class="article_cover">
                                 <img src="{{post.image.url}}" alt=""/>
-                                <a href="{% url 'Blog' %}" class="cats_item">{{post.category}}</a>
+                                <a href="{% url 'Blog' post.category.slug %}" class="cats_item">{{post.category}}</a>
                             </div>
                             <div class="article_infoline infoline">
                                 <div class="infoline_date">{{post.created_at}}</div> <span class="dash"></span>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="article_tags">
                                 <div class="article_tags_title">Tags:</div>
-                                <a href="{% url 'Blog' %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' %}">#{{post.category}}</a>
+                                <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a>
                             </div>
                             <div class="author">
                                 <div class="author_img"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
@@ -104,7 +104,7 @@
                             <h3>Categories</h3>
                             <div class="cats">
                                 {% for c in categories %}
-                                    <a href="{% url 'Blog' %}" class="cats_item">{{c.name}}</a>
+                                    <a href="{% url 'Blog' c.slug %}" class="cats_item">{{c.name}}</a>
                                 {% endfor %}
                             </div>
                         </div>

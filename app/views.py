@@ -8,12 +8,19 @@ from app.models import *
 # Index (Home) Page
 def IndexPage(request):
   template_name = 'index.html'
+  category = Category.objects.all().order_by('?')[0]
   featured_posts = Blog.objects.all()[:3]
   recent_posts = Blog.objects.all().order_by('-created_at')[3:7]
   popular_post = Blog.objects.all().order_by('-created_at')[11]
   most_read_posts = Blog.objects.all().order_by('-created_at')[17:21]
   hot_post = Blog.objects.all().order_by('?')[0]
   top_of_the_week = Blog.objects.all().order_by('-created_at')[21:24]
+  counts = []
+
+  for c in Category.objects.all():
+    counts.append(Blog.objects.filter(category=c).count())
+
+  category_counts = zip(Category.objects.all(), counts)
 
   context = {
     'featured_posts': featured_posts,
@@ -21,7 +28,9 @@ def IndexPage(request):
     'popular_post': popular_post,
     'most_read_posts': most_read_posts,
     'hot_post': hot_post,
-    'top_of_the_week': top_of_the_week
+    'top_of_the_week': top_of_the_week,
+    'category': category,
+    'category_counts': category_counts,
   }
 
   return render(request, template_name, context)
@@ -29,11 +38,12 @@ def IndexPage(request):
 # Blog Page
 def BlogHome(request, slug):
   template_name = 'blog.html'
-
+  category = get_object_or_404(Category, slug=slug)
   posts = Blog.objects.filter(category__slug=slug)
 
   context = {
     'posts': posts,
+    'category': category,
   }
 
   return render(request, template_name, context)

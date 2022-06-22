@@ -16,7 +16,7 @@
                                 <div class="article_item">
                                     <div class="article_item_cover">
                                         <a href="{% url 'post_details' p.slug %}"><img src="{{p.image.url}}" alt=""/></a>
-                                        <a href="{% url 'Blog' %}" class="cats_item">p.category</a>
+                                        <a href="{% url 'Blog' p.slug %}" class="cats_item">{{p.category}}</a>
                                     </div>
                                     <div class="article_infoline infoline">
                                         <div class="infoline_date">p.created_at</div> <span class="dash"></span>
@@ -67,8 +67,8 @@
                         <div class="sidebar_widget">
                             <h3>Categories</h3>
                             <div class="cats">
-                                {% for cat in category %}
-                                <a href="{% url 'Blog' %}" class="cats_item">{{cat.name}}</a>
+                                {% for cat in categories %}
+                                    <a href="{% url 'Blog' cat.slug %}" class="cats_item">{{cat.name}}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                     <div class="popular_item">
                                         <div class="popular_item_img"><a href="{% url 'post_details' p.slug %}"><img data-src="{{p.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                                         <div class="popular_item_cont">
-                                            <div class="popular_item_title"><a href="{% url 'post_details' p.slug %}">{{p.title|truncatewords:07}}</a></div>
+                                            <div class="popular_item_title"><a href="{% url 'post_details' p.slug %}">{{p.title|truncatewords:05}}</a></div>
                                             <div class="popular_item_infoline infoline">
                                                 <div class="infoline_date">{{p.}}</div> <span class="dash"></span>
                                                 <div class="infoline_tag"><span class="icon-comm"></span>5</div>
