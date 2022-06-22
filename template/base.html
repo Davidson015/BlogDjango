@@ -31,13 +31,9 @@
                             <a href="#" class="header_categ_opener"><span class="icon-grid"></span>Categories</a>
                             <div class="header_categ_drop">
                                 <ul class="catlist">
-                                    <li><a href="{% url 'Blog' %}">Home&garden <span>(15)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">Travel <span>(23)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">Electronics <span>(34)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">Office <span>(5)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">cars <span>(51)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">pets <span>(8)</span></a></li>
-                                    <li><a href="{% url 'Blog' %}">fashion <span>(29)</span></a></li>
+                                    {% for c in categories %}
+                                        <li><a href="{% url 'Blog' %}">{{c.name}} <span>(15)</span></a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -71,7 +67,7 @@
                     <div class="footer_cols_item footer_cols_item-2">
                         <div class="footer_title">Categories</div>
                         <ul class="footer_list">
-                            {% for c in category %}
+                            {% for c in categories %}
                                 <li><a href="{% url 'Blog' %}">{{c.name}}</a></li>
                             {% endfor %}
                         </ul>

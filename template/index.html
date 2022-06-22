@@ -10,7 +10,7 @@
                         <div class="welcome_slider_img"><img data-src="{{f.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
                         <div class="welcome_slider_cont">
                             <div class="welcome_slider_cats cats">
-                                <a href="blog.html" class="cats_item">{{f.category}}</a>
+                                <a href="{% url 'Blog' %}" class="cats_item">{{f.category}}</a>
                             </div>
                             <div class="welcome_slider_title h3"><a href="{% url 'post_details' f.slug %}">{{f.title}}</a></div>
                             <div class="welcome_slider_infoline infoline">
@@ -39,7 +39,7 @@
                                     <div class="recent_item">
                                         <div class="recent_item_img">
                                             <a href="{% url 'post_details' r.slug %}"><img data-src="{{r.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
-                                            <div class="recent_item_cats cats"><a href="blog.html" class="cats_item">{{r.category}}</a></div>
+                                            <div class="recent_item_cats cats"><a href="{% url 'Blog' %}" class="cats_item">{{r.category}}</a></div>
                                         </div>
                                         <div class="recent_item_cont">
                                             <div class="recent_item_title h3"><a href="{% url 'post_details' r.slug %}">{{r.title}}</a></div>
@@ -130,7 +130,7 @@
                     <div class="columns_center">
                         <div class="section_title">
                             <h2>Most read posts</h2>
-                            <a href="blog.html" class="link-view">View all posts <span class="icon-arr"></span></a>
+                            <a href="{% url 'Blog' %}" class="link-view">View all posts <span class="icon-arr"></span></a>
                         </div>
                         <div class="readed">
                             {% for m in most_read_posts %}
@@ -138,8 +138,8 @@
                                     <div class="readed_item_img">
                                         <a href="{% url 'post_details' m.slug %}"><img data-src="{{m.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
                                         <div class="readed_item_cats cats">
-                                            <a href="blog.html" class="cats_item">{{m.category}}</a>
-                                            <a href="blog.html" class="cats_item">{{m.category}}</a>
+                                            <a href="{% url 'Blog' %}" class="cats_item">{{m.category}}</a>
+                                            <a href="{% url 'Blog' %}" class="cats_item">{{m.category}}</a>
                                         </div>
                                     </div>
                                     <div class="readed_item_cont">
@@ -163,7 +163,7 @@
                         </div>
                         <div class="sidebar_widget">
                             <ul class="catlist">
-                                {% for cat in category %}
+                                {% for cat in categories %}
                                     <li><a href="{% url 'Blog' %}"><span>{{ cat.name }}</span> (-)</a></li>
                                 {% endfor %}
                             </ul>
@@ -193,7 +193,7 @@
                     <div class="hot_img"><a href="{% url 'post_details' hot_post.slug %}"><img data-src="{{hot_post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div>
                     <div class="hot_cont">
                         <div class="hot_cats cats">
-                            <a href="blog.html" class="cats_item">{{hot_post.category}}</a>
+                            <a href="{% url 'Blog' %}" class="cats_item">{{hot_post.category}}</a>
                         </div>
                         <h2 class="hot_title"><a href="{% url 'post_details' hot_post.slug %}">{{hot_post.title|truncatewords:05}}</a></h2>
                         <div class="hot_txt">{{hot_post.content|truncatewords:15}}</div>
@@ -220,8 +220,8 @@
                         <div class="topof_item">
                             <div class="topof_item_img"><a href="{% url 'post_details' t.slug %}"><img data-src="{{t.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a></div> 
                             <div class="topof_cats cats">
-                                <a href="blog.html" class="cats_item">{{t.category}}</a>
-                                <a href="blog.html" class="cats_item">{{t.category}}</a>
+                                <a href="{% url 'Blog' %}" class="cats_item">{{t.category}}</a>
+                                <a href="{% url 'Blog' %}" class="cats_item">{{t.category}}</a>
                             </div>
                             <div class="topof_item_title"><a href="{% url 'post_details' t.slug %}">{{t.title|truncatewords:10}}</a></div>
                             <div class="topof_item_infoline infoline">
