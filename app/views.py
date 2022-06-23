@@ -1,5 +1,5 @@
-from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from app.forms import CommentForm
 
 from app.models import *
@@ -39,7 +39,16 @@ def IndexPage(request):
 def BlogHome(request, slug):
   template_name = 'blog.html'
   category = get_object_or_404(Category, slug=slug)
-  posts = Blog.objects.filter(category__slug=slug)
+  post_list = Blog.objects.filter(category__slug=slug)
+  page = request.GET.get('page', 1)
+  paginator = Paginator(post_list, 3)
+
+  try:
+    posts = paginator.page(page)
+  except PageNotAnInteger:
+    posts = paginator.page(1)
+  except EmptyPage:
+    posts = paginator.page(paginator.num_pages)
 
   context = {
     'posts': posts,

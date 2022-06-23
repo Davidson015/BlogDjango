@@ -33,11 +33,29 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="pagenavi">
-                            <span class="current">1</span>
-                            <a href="#">2</a>
-                            <a href="#"><span class="icon-arrow"></span></a>
-                        </div>
+                        {% if posts.has_other_pages %}
+                            <div class="pagenavi">
+                                {% if posts.has_previous %}
+                                    <a href="?page={{posts.previous_page_number}}">&laquo;</a>
+                                {% else %}
+                                    <a class="disabled">&laquo;</a>
+                                {% endif %}
+
+                                {% for p in posts.paginator.page_range %}
+                                    {% if posts.number == p %}
+                                        <span class="current">{{p}}</span>
+                                    {% else %}
+                                        <a href="?page={{p}}">{{p}}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if posts.has_next %}
+                                    <a href="?page={{posts.next_page_number}}">&raquo;</a>
+                                {% else %}
+                                    <a class="disabled">&raquo;</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                         <a href="#" class="bann"><img data-src="{% static 'img/bad1.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
                     </div>
                     <aside class="columns_sidebar sidebar">
