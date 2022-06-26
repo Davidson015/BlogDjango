@@ -80,3 +80,9 @@ def PostDetails(request, slug):
   }
 
   return render(request, template_name, context)
+
+# 404 Page
+def page_404(request, exception):
+  template_name = 'page404.html'
+
+  return render(request, template_name)
