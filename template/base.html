@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
@@ -43,11 +44,11 @@
                     <div class="header_mid">
                         <a href="{% url 'Index' %}" class="header_logo logo" title=""><img data-src="{% static 'img/logo.png' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>    
                         <ul class="header_nav">
-                            <li><a href="{% url 'Index' %}">Recent posts</a></li>
-                            <li><a href="{% url 'Index' %}">popular</a></li>
-                            <li><a href="{% url 'Index' %}">Most read</a></li>
-                            <li><a href="{% url 'Index' %}">Hot stuff</a></li>
-                            <li><a href="{% url 'Index' %}">top of the week</a></li>
+                            <li><a href="{% anchor 'Index' 'recent' %}">Recent posts</a></li>
+                            <li><a href="{% anchor 'Index' 'popular' %}">popular</a></li>
+                            <li><a href="{% anchor 'Index' 'mostreaded' %}">Most read</a></li>
+                            <li><a href="{% anchor 'Index' 'hot' %}">Hot stuff</a></li>
+                            <li><a href="{% anchor 'Index' 'top' %}">top of the week</a></li>
                             <li><a href="{% url 'Index' %}">Must read</a></li>
                         </ul>
                         <a href="#" class="button-nav"><span></span></a>
