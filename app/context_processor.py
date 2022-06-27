@@ -1,4 +1,3 @@
-from unicodedata import category
 from .models import *
 
 def blog_renderer(request):
