@@ -9,13 +9,68 @@
                     <a href="{% url 'Index' %}">Home</a> <span class="dash"></span> <span>404</span>
                 </div>
                 <div class="errorpage">
-                    <div class="errorpage_big">404</div>
-                    <div class="errorpage_cont">
-                        <div class="errorpage_title">Page not found</div>
-                        <div class="errorpage_txt">It looks like nothing was found at this location. Maybe try a search?</div>
-                    </div>
+                    {% if search_posts %}
+                        <div class="columns">
+                            <div class="columns_center">
+                                <div class="article article_list">
+                                    {% for sp in search_posts %}
+                                        <div class="article_item">
+                                            <div class="article_item_cover">
+                                                <a href="{% url 'post_details' sp.slug %}"><img src="{{sp.image.url}}" alt=""/></a>
+                                                <a href="{% url 'Blog' sp.slug %}" class="cats_item">{{sp.category}}</a>
+                                            </div>
+                                            <div class="article_infoline infoline">
+                                                <div class="infoline_date">{{sp.created_at}}</div> <span class="dash"></span>
+                                                <div class="infoline_author">
+                                                    <div class="ava"><img data-src="{{sp.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                                    {{sp.author}}
+                                                </div>
+                                            </div>
+                                            <div class="article_txt">
+                                                <div class="article_title h2"><a href="{% url 'post_details' sp.slug %}">{{sp.title|truncatewords:06}}</a></div>
+                                                <div class="article_desc">{{sp.content|truncatewords:20}}</div>
+                                                <div class="article_btn"><a href="{% url 'post_details' sp.slug %}" class="btn">read more</a></div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% if search_posts.has_other_pages %}
+                                    <div class="pagenavi">
+                                        {% if search_posts.has_previous %}
+                                            <a href="?page={{search_posts.previous_page_number}}">&laquo;</a>
+                                        {% else %}
+                                            <a class="disabled">&laquo;</a>
+                                        {% endif %}
+        
+                                        {% for r in search_posts.paginator.page_range %}
+                                            {% if search_posts.number == r %}
+                                                <span class="current">{{r}}</span>
+                                            {% else %}
+                                                <a href="?page={{r}}">{{r}}</a>
+                                            {% endif %}
+                                        {% endfor %}
+        
+                                        {% if search_posts.has_next %}
+                                            <a href="?page={{search_posts.next_page_number}}">&raquo;</a>
+                                        {% else %}
+                                            <a class="disabled">&raquo;</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% elif default_if_none %}
+                        <h3>No Posts Found.</h3>
+                    {% else %}
+                        <div class="errorpage_big">404</div>
+                        <div class="errorpage_cont">
+                            <div class="errorpage_title">Page not found</div>
+                            <div class="errorpage_txt">It looks like nothing was found at this location. Maybe try a search?</div>
+                        </div>
+                    {% endif %}
                     <div class="errorpage_search">
-                        <form>
+                        <form method="GET">
+                            {% csrf_token %}
                             <div class="search">
                                 <input type="text" class="form-control" placeholder="Search..."/>
                                 <button class="btn"><span class="icon-search"></span></button>

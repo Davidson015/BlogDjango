@@ -14,73 +14,126 @@
                 </div>
                 <div class="columns">
                     <div class="columns_center">
-                        <article class="article">
-                            <div class="article_cover">
-                                <img src="{{post.image.url}}" alt=""/>
-                                <a href="{% url 'Blog' post.category.slug %}" class="cats_item">{{post.category}}</a>
-                            </div>
-                            <div class="article_infoline infoline">
-                                <div class="infoline_date">{{post.created_at}}</div> <span class="dash"></span>
-                                <div class="infoline_author">
-                                    <div class="ava"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                    {{post.author}}
-                                </div>
-                            </div>
-                            <div class="article_txt">
-                                <h1>{{post.title}}</h1>
-                                <p>{{post.content}}</p>
-                            </div>
-                            <div class="article_tags">
-                                <div class="article_tags_title">Tags:</div>
-                                <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a>
-                            </div>
-                            <div class="author">
-                                <div class="author_img"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
-                                <div class="author_cont">
-                                    <div class="author_name">{{post.author}}</div>
-                                    {% comment %} <div class="author_txt">Web developer since 2006. Create hundreds of websites, HTML and CSS3 expert, who started to learn web design on a <span class="nowrap">world-class</span> level. </div> {% endcomment %}
-                                </div>
-                            </div>
-                        </article>
-                        <div class="comments_form">
-                            <h3>Leave a comment</h3>
-                            <form id="form" method="POST">
-                                {% csrf_token %}
-                                <div class="form_cols">
-                                    <div class="form_cols_item">
-                                        <div class="form_row">
-                                            {{ form.full_name|add_class:"form-control"|attr:"placeholder:Fullname"|attr:"type:text" }}
+                        {% if search_posts %}
+                            <div class="article article_list">
+                                {% for p in search_posts %}
+                                    <div class="article_item">
+                                        <div class="article_item_cover">
+                                            <a href="{% url 'post_details' p.slug %}"><img src="{{p.image.url}}" alt=""/></a>
+                                            <a href="{% url 'Blog' p.slug %}" class="cats_item">{{p.category}}</a>
+                                        </div>
+                                        <div class="article_infoline infoline">
+                                            <div class="infoline_date">{{p.created_at}}</div> <span class="dash"></span>
+                                            <div class="infoline_author">
+                                                <div class="ava"><img data-src="{{p.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                                {{p.author}}
+                                            </div>
+                                        </div>
+                                        <div class="article_txt">
+                                            <div class="article_title h2"><a href="{% url 'post_details' p.slug %}">{{p.title|truncatewords:06}}</a></div>
+                                            <div class="article_desc">{{p.content|truncatewords:20}}</div>
+                                            <div class="article_btn"><a href="{% url 'post_details' p.slug %}" class="btn">read more</a></div>
                                         </div>
                                     </div>
-                                    <div class="form_cols_item">
-                                        <div class="form_row">
-                                            {{ form.phone_number|add_class:"form-control"|attr:"placeholder:+1 (___) ___ __ __"|attr:"type:tel" }}
-                                        </div>
-                                    </div>
-                                    <div class="form_cols_item">
-                                        <div class="form_row">
-                                            {{ form.email|add_class:"form-control"|attr:"placeholder:Email"|attr:"type:email" }}
-                                        </div>
+                                {% endfor %}
+                            </div>
+                            {% if search_posts.has_other_pages %}
+                                <div class="pagenavi">
+                                    {% if search_posts.has_previous %}
+                                        <a href="?page={{search_posts.previous_page_number}}">&laquo;</a>
+                                    {% else %}
+                                        <a class="disabled">&laquo;</a>
+                                    {% endif %}
+    
+                                    {% for r in search_posts.paginator.page_range %}
+                                        {% if search_posts.number == r %}
+                                            <span class="current">{{r}}</span>
+                                        {% else %}
+                                            <a href="?page={{r}}">{{r}}</a>
+                                        {% endif %}
+                                    {% endfor %}
+    
+                                    {% if search_posts.has_next %}
+                                        <a href="?page={{search_posts.next_page_number}}">&raquo;</a>
+                                    {% else %}
+                                        <a class="disabled">&raquo;</a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% elif post %}
+                            <article class="article">
+                                <div class="article_cover">
+                                    <img src="{{post.image.url}}" alt=""/>
+                                    <a href="{% url 'Blog' post.category.slug %}" class="cats_item">{{post.category}}</a>
+                                </div>
+                                <div class="article_infoline infoline">
+                                    <div class="infoline_date">{{post.created_at}}</div> <span class="dash"></span>
+                                    <div class="infoline_author">
+                                        <div class="ava"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                        {{post.author}}
                                     </div>
                                 </div>
-                                <div class="form_row">
-                                    {{ form.comment|add_class:"form-control"|attr:"placeholder:Enter your comment"|attr:"type:text" }}
+                                <div class="article_txt">
+                                    <h1>{{post.title}}</h1>
+                                    <p>{{post.content}}</p>
                                 </div>
-                                <div class="form_btn"><button class="btn">Post comment</button></div>
-                            </form>
-                        </div>
-                        {% for c in post_comments %}
-                            {{c.comment}}<br>
-                            {{c.full_name}}<br>
-                            {{c.created_at}}<br>
-                        {% endfor %}
-                        <a href="#" class="bann"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                                <div class="article_tags">
+                                    <div class="article_tags_title">Tags:</div>
+                                    <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a> <span class="dash"></span> <a href="{% url 'Blog' post.category.slug %}">#{{post.category}}</a>
+                                </div>
+                                <div class="author">
+                                    <div class="author_img"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></div>
+                                    <div class="author_cont">
+                                        <div class="author_name">{{post.author}}</div>
+                                        {% comment %} <div class="author_txt">Web developer since 2006. Create hundreds of websites, HTML and CSS3 expert, who started to learn web design on a <span class="nowrap">world-class</span> level. </div> {% endcomment %}
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div class="comments_form">
+                                <h3>Leave a comment</h3>
+                                <form id="form" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form_cols">
+                                        <div class="form_cols_item">
+                                            <div class="form_row">
+                                                {{ form.full_name|add_class:"form-control"|attr:"placeholder:Fullname"|attr:"type:text" }}
+                                            </div>
+                                        </div>
+                                        <div class="form_cols_item">
+                                            <div class="form_row">
+                                                {{ form.phone_number|add_class:"form-control"|attr:"placeholder:+1 (___) ___ __ __"|attr:"type:tel" }}
+                                            </div>
+                                        </div>
+                                        <div class="form_cols_item">
+                                            <div class="form_row">
+                                                {{ form.email|add_class:"form-control"|attr:"placeholder:Email"|attr:"type:email" }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_row">
+                                        {{ form.comment|add_class:"form-control"|attr:"placeholder:Enter your comment"|attr:"type:text" }}
+                                    </div>
+                                    <div class="form_btn"><button class="btn">Post comment</button></div>
+                                </form>
+                            </div>
+                            
+                            {% for c in post_comments %}
+                                {{c.comment}}<br>
+                                {{c.full_name}}<br>
+                                {{c.created_at}}<br>
+                            {% endfor %}
+                        {% else %}
+                            <h3>No Posts Found.</h3>
+                        {% endif %}
+                        <a href="#" class="bann"><img data-src="{% static 'img/img7.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="{% static 'img/img7.jpg' %}"/></a>
                     </div>
                     <aside class="columns_sidebar sidebar">
                         <div class="sidebar_search">
-                            <form>
+                            <form method="GET">
+                                {% csrf_token %}
                                 <div class="search">
-                                    <input type="text" class="form-control" placeholder="Search..."/>
+                                    <input type="text" name="search" class="form-control" placeholder="Search..."/>
                                     <button class="btn"><span class="icon-search"></span></button>
                                 </div>
                             </form>
@@ -108,7 +161,7 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <a href="#" class="bann"><img data-src="{{post.image.url}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt=""/></a>
+                        <a href="#" class="bann"><img data-src="{% static 'img/bad2.jpg' %}" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" class="js-img" alt="{% static 'img/bad2.jpg' %}"/></a>
                         <div class="sidebar_widget">
                             <h3>Follow us</h3>
                             <div class="soc">

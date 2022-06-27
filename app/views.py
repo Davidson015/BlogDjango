@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from app.forms import CommentForm
+from django.db.models import Q
 
+from app.forms import CommentForm
 from app.models import *
 
 # Create your views here.
@@ -39,10 +40,16 @@ def IndexPage(request):
 def BlogHome(request, slug):
   template_name = 'blog.html'
   category = get_object_or_404(Category, slug=slug)
-  post_list = Blog.objects.filter(category__slug=slug)
   page = request.GET.get('page', 1)
-  paginator = Paginator(post_list, 3)
+  search = request.GET.get('search')
 
+  if search:
+    post_list = Blog.objects.filter(Q(title__icontains=search) | Q(content__icontains=search) | Q(category__name__icontains=search) | (Q(author__icontains=search)))
+  else:
+    post_list = Blog.objects.filter(category__slug=slug)
+
+  paginator = Paginator(post_list, 3)
+  
   try:
     posts = paginator.page(page)
   except PageNotAnInteger:
@@ -60,21 +67,46 @@ def BlogHome(request, slug):
 # Blog Details Page
 def PostDetails(request, slug):
   template_name = "article.html"
-  post = get_object_or_404(Blog, slug=slug)
   form = CommentForm()
-  if request.method == "POST":
-    form = CommentForm(request.POST or None)
-    if form.is_valid():
-      c = form.save(commit=False)
-      c.post = post
-      c.save()
+  search = request.GET.get('search')
+  post = None
+  post_comments = None
+  search_posts = None
 
-      return redirect('post_details', slug=slug)
+  if search:
+    search_post_list = Blog.objects.filter(Q(title__icontains=search) | Q(content__icontains=search) | Q(category__name__icontains=search) | (Q(author__icontains=search)))
+    
+    page = request.GET.get('page', 1)
+    paginator = Paginator(search_post_list, 3)
+    
+    try:
+      sp = paginator.page(page)
+      search_posts = sp
+    except PageNotAnInteger:
+      sp = paginator.page(1)
+      search_posts = sp
+    except EmptyPage:
+      sp = paginator.page(paginator.num_pages)
+      search_posts = sp
+  else:
+    post = get_object_or_404(Blog, slug=slug)
+    
+    if request.method == "POST":
+      form = CommentForm(request.POST or None)
+      if form.is_valid():
+        c = form.save(commit=False)
+        c.post = post
+        c.save()
 
-  post_comments = Comment.objects.filter(post=post)
+        return redirect('post_details', slug=slug)
+
+    pc = Comment.objects.filter(post=post)
+    post_comments = pc
+
 
   context = {
     'post': post,
+    'search_posts': search_posts,
     'form': form,
     'post_comments': post_comments,
   }
