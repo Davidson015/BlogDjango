@@ -31,7 +31,7 @@ class Blog(models.Model):
   image = models.ImageField(upload_to="BlogImages/")
   author = models.CharField(max_length=150)
   category = models.ForeignKey("Category", on_delete=models.CASCADE)
-  slug = models.SlugField(max_length=100, unique=True, blank=True)
+  slug = models.SlugField(max_length=500, unique=True, blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
 
   class Meta:
@@ -67,4 +67,3 @@ class Comment(models.Model):
 
   def get_absolute_url(self):
     return reverse("Comment_detail", kwargs={"pk": self.pk})
-
